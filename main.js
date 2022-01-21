@@ -36,8 +36,9 @@ function run() {
         let deserializedOptions;
         if (optionsInput) {
             try {
-                deserializedOptions = JSON.parse(optionsInput);
-            } catch(e) {
+                const optionsInputWithoutNewlines = optionsInput.replace(/[\n\r]+/g, '\\n');
+                deserializedOptions = JSON.parse(optionsInputWithoutNewlines);
+            } catch (e) {
                 setFailed(new Error(`Input value "options" cannot be parsed into a JSON object.`));
                 return;
             }
